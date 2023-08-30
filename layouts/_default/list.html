@@ -1,0 +1,18 @@
+{{ define "title" -}}
+{{ .Title | title }}
+{{- end }}
+{{ define "main" -}}
+{{ .Content }}
+
+<div class="blogPostList">
+{{ range (site.GetPage "blog").Pages }}
+<li>
+        <i><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "02 Jan 2006" }}</time>
+-
+{{ math.Round (div (countwords .Content) 220.0) }} minutes
+-</i>
+<a href="{{ .RelPermalink }}">{{ .Title }}</a>        
+</li>
+{{- end }}
+</div>
+{{- end }}
